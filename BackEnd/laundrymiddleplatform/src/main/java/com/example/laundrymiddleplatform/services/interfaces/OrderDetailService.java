@@ -8,8 +8,11 @@ import java.util.Optional;
 
 @Service
 public interface OrderDetailService {
-    OrderDetail createOrderDetail(Long orderId, Long productId, int quantity, double price);
-    List<OrderDetail> orderDetailList();
+    OrderDetail saveOrderDetail(OrderDetail orderDetail);
+
+    List<OrderDetail> getAllOrderDetails();
+
+    void deleteOrderDetail(Long id);
 
     Optional<OrderDetail> getOrderDetailId(Long Id);
 }

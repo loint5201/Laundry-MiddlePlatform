@@ -6,6 +6,7 @@ import com.example.laundrymiddleplatform.services.interfaces.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -35,8 +36,17 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public boolean deleteStore(Long storeId) {
-        storeRepository.deleteById(storeId);
-        return true;
+    public Store saveStore(Store store) {
+        return storeRepository.save(store);
+    }
+
+    @Override
+    public List<Store> getAllStores() {
+        return storeRepository.findAll();
+    }
+
+    @Override
+    public void deleteStore(Long id) {
+        storeRepository.deleteById(id);
     }
 }

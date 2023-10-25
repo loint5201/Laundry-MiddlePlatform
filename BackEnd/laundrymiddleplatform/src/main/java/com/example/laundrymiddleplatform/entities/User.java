@@ -46,19 +46,19 @@ public class User {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+07:00")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date createAt;
 
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+07:00")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
     @Column(name = "last_login")
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+07:00")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date lastLogin;
 
 }

@@ -13,27 +13,21 @@ import java.util.Optional;
 
 public class OrderDetailServiceImpl implements OrderDetailService {
     @Autowired
-    private final OrderDetailRepository orderDetailRepository;
+    private OrderDetailRepository orderDetailRepository;
 
-    public OrderDetailServiceImpl(OrderDetailRepository orderDetailRepository) {
-        this.orderDetailRepository = orderDetailRepository;
+    @Override
+    public OrderDetail saveOrderDetail(OrderDetail orderDetail) {
+        return orderDetailRepository.save(orderDetail);
     }
 
     @Override
-    public OrderDetail createOrderDetail(Long orderId, Long productId, int quantity, double price) {
-        OrderDetail saveOrderDetail = orderDetailRepository.save(OrderDetail.builder()
-                .orderId(orderId)
-                .productId(productId)
-                .quantity(quantity)
-                .price(price)
-                .build());
-        return saveOrderDetail;
+    public List<OrderDetail> getAllOrderDetails() {
+        return orderDetailRepository.findAll();
     }
 
     @Override
-    public List<OrderDetail> orderDetailList() {
-        List<OrderDetail> orderDetailList = orderDetailRepository.findAll();
-        return orderDetailList;
+    public void deleteOrderDetail(Long id) {
+        orderDetailRepository.deleteById(id);
     }
 
     @Override

@@ -6,32 +6,33 @@ import com.example.laundrymiddleplatform.services.interfaces.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
 public class StaffServiceImpl implements StaffService {
     @Autowired
-    private final StaffRepository staffRepository;
+    private StaffRepository staffRepository;
 
-    public StaffServiceImpl(StaffRepository staffRepository) {
-        this.staffRepository = staffRepository;
+    @Override
+    public Staff saveStaff(Staff staff) {
+        return staffRepository.save(staff);
     }
 
     @Override
-    public Staff createStaff(Long userId, Long storeId) {
-        Staff saveStaff = staffRepository.save(Staff.builder()
-                .userId(userId)
-                .storeId(storeId)
-                .build());
-        return saveStaff;
+    public List<Staff> getAllStaff() {
+        return staffRepository.findAll();
     }
 
     @Override
-    public boolean deleteStaff(Long staffId) {
-        staffRepository.deleteById(staffId);
-        return true;
+    public Staff getStaffById(Long id) {
+        return staffRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public void deleteStaff(Long id) {
+        staffRepository.deleteById(id);
+    }
     @Override
     public Optional<Staff> getStaffId(Long Id) {
         Optional<Staff> staffId = staffRepository.findById(Id);

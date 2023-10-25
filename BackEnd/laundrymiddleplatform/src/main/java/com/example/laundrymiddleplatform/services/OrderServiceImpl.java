@@ -13,15 +13,21 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    private final OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
     @Override
-    public List<Order> orderList() {
-        List<Order> orderList = orderRepository.findAll();
-        return orderList;
+    public Order saveOrder(Order order) {
+        return orderRepository.save(order);
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public void deleteOrder(Long id) {
+        orderRepository.deleteById(id);
     }
 
     @Override
@@ -30,17 +36,4 @@ public class OrderServiceImpl implements OrderService {
         return orderId;
 
     }
-
-
-    @Override
-    public Order createOrder(Long userId, Long storeId, Long staffId) {
-        Order saveOrder = orderRepository.save(Order.builder()
-                .userId(userId)
-                .storeId(storeId)
-                .staffId(staffId)
-                .build());
-        return saveOrder;
-    }
-
-
 }
